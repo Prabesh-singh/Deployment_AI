@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+import os
 # ==========================================
 # 1. Load Vocabulary Mappings
 # ==========================================
@@ -169,5 +169,8 @@ def ask_api(request: QueryRequest):
 
 
 # Bind to 0.0.0.0 so external mobile devices on your Wi-Fi can reach it
+
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
